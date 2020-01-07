@@ -78,3 +78,43 @@ function renderSkills( data ) {
 
     return;
 }
+
+function renderGallery( target, data ) {
+    let HTML = '';
+
+    if ( !Array.isArray(data) ) {
+        return console.error('ERROR: negaliu sugeneruoti "Gallery" sekcijos, del blogo formato duomenu.');
+    }
+    if ( data.length === 0 ) {
+        return console.error('ERROR: negaliu sugeneruoti "Gallery" sekcijos, del tuscio saraso.');
+    }
+
+    // generuojame galerijos filtra
+    let filterHTML = 'GALLERY FILTER';
+
+
+    // generuojame galerijos elementus
+    let listHTML = '';
+    for ( let i=0; i<data.length; i++ ) {
+        const work = data[i];
+        listHTML += `<div class="gallery-item">
+                        GALLERY ITEM ${i+1}
+                    </div>`;
+    }
+
+    // viska apjungiame i galutine galerija
+    HTML = `<div class="gallery">
+                <div class="gallery-filter">
+                    ${filterHTML}
+                </div>
+                <div class="gallery-list">
+                    ${listHTML}
+                </div>
+            </div>`;
+    
+    document.querySelector(target).innerHTML = HTML;
+
+    // sudeti eventListener ant filtravimo elementu
+
+    return;
+}
