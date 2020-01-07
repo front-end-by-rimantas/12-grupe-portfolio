@@ -48,3 +48,33 @@ function renderAchievements( data ) {
 
     return;
 }
+
+function renderSkills( data ) {
+    let HTML = '';
+
+    if ( !Array.isArray(data) ) {
+        return console.error('ERROR: negaliu sugeneruoti "Skills" sekcijos, del blogo formato duomenu.');
+    }
+    if ( data.length === 0 ) {
+        return console.error('ERROR: negaliu sugeneruoti "Skills" sekcijos, del tuscio saraso.');
+    }
+
+    for ( let i=0; i<data.length; i++ ) {
+        const skill = data[i];
+        HTML += `<div class="progress-bar">
+                    <div class="texts">
+                        <div class="title">${skill.title}</div>
+                        <div class="value">${skill.value}%</div>
+                    </div>
+                    <div class="bar">
+                        <div class="value" style="width: ${skill.value}%;">
+                            <div class="loading"></div>
+                        </div>
+                    </div>
+                </div>`;
+    }
+    
+    document.querySelector('#skills_progress_bars').innerHTML = HTML;
+
+    return;
+}
