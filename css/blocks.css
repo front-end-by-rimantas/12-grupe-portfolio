@@ -1,4 +1,6 @@
 .block {
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 60px 20px;
   border-radius: 4px;
   -webkit-box-shadow: 0 4px 16px #0008;
@@ -13,6 +15,8 @@
   line-height: 96px;
   border: 2px solid var(--primary-color);
   border-radius: 50%;
+  -webkit-animation: wave 3s linear 0s infinite;
+          animation: wave 3s linear 0s infinite;
 }
 
 .block > span {
@@ -30,4 +34,28 @@
   text-transform: uppercase;
   font-size: 17px;
   line-height: 20px;
+}
+
+@-webkit-keyframes wave {
+  0% {
+    border-radius: 40% 50% 35% 45%;
+  }
+  50% {
+    border-radius: 30% 35% 50% 40%;
+  }
+  100% {
+    border-radius: 40% 50% 35% 45%;
+  }
+}
+
+@keyframes wave {
+  0% {
+    border-radius: 40% 50% 35% 45%;
+  }
+  50% {
+    border-radius: 30% 35% 50% 40%;
+  }
+  100% {
+    border-radius: 40% 50% 35% 45%;
+  }
 }
