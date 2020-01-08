@@ -81,7 +81,20 @@ function renderSkills( data ) {
 
 function renderGallery( target, data ) {
     let HTML = '';
+    const targetDOM = document.querySelector(target);
 
+    // target vietos validavimas
+    if ( typeof(target) !== 'string' ) {
+        return console.error('ERROR: vietos selectorius turi buti tekstinio tipo.');
+    }
+    if ( target.length === 0 ) {
+        return console.error('ERROR: vietos selectorius negali buti tuscias tekstas.');
+    }
+    if ( targetDOM === null ) {
+        return console.error('ERROR: pagal pateikta selectoriu norima vieta/elementas nerastas.');
+    }
+
+    // pradinis duomenu validavimas
     if ( !Array.isArray(data) ) {
         return console.error('ERROR: negaliu sugeneruoti "Gallery" sekcijos, del blogo formato duomenu.');
     }
@@ -89,32 +102,48 @@ function renderGallery( target, data ) {
         return console.error('ERROR: negaliu sugeneruoti "Gallery" sekcijos, del tuscio saraso.');
     }
 
-    // generuojame galerijos filtra
-    let filterHTML = 'GALLERY FILTER';
-
-
-    // generuojame galerijos elementus
-    let listHTML = '';
-    for ( let i=0; i<data.length; i++ ) {
-        const work = data[i];
-        listHTML += `<div class="gallery-item">
-                        GALLERY ITEM ${i+1}
-                    </div>`;
-    }
-
     // viska apjungiame i galutine galerija
     HTML = `<div class="gallery">
                 <div class="gallery-filter">
-                    ${filterHTML}
+                    ${ generateGalleryFilter( data ) }
                 </div>
                 <div class="gallery-list">
-                    ${listHTML}
+                    ${ generateGalleryList( data ) }
                 </div>
             </div>`;
     
-    document.querySelector(target).innerHTML = HTML;
+    targetDOM.innerHTML = HTML;
 
     // sudeti eventListener ant filtravimo elementu
 
     return;
+}
+
+function generateGalleryFilter( data ) {
+    return 'GALLERY FILTER';
+}
+
+function generateGalleryList( data ) {
+    let HTML = '';
+
+    for ( let i=0; i<data.length; i++ ) {
+        const work = data[i];
+
+        let catHTML = '';
+        for ( let c=0; c<work.category.length; c++ ) {
+            catHTML += `<span class="cat">${work.category[c]}</span>`;
+        }
+        
+        HTML += `<div class="gallery-item">
+                    <img src="./img/works/${work.img}">
+                    <div class="texts">
+                        <span class="title">${work.title}</span>
+                        <div class="categories">
+                            ${catHTML}
+                        </div>
+                    </div>
+                </div>`;
+    }
+
+    return HTML;
 }

@@ -60,32 +60,32 @@ const skills = [
 
 const works = [
     {
-        img: 'img-1.png',
+        img: 'serlokas.png',
         title: 'Serlokas',
         category: ['HTML', 'CSS']
     },
     {
-        img: 'img-1.png',
+        img: 'mergaite.png',
         title: 'Mergaite',
         category: ['HTML', 'CSS']
     },
     {
-        img: 'img-1.png',
+        img: 'sign-up.png',
         title: 'Sign up',
         category: ['HTML', 'CSS']
     },
     {
-        img: 'img-1.png',
+        img: 'coming-soon.png',
         title: 'Coming soon',
         category: ['HTML', 'CSS', 'Responsive']
     },
     {
-        img: 'img-1.png',
+        img: 'facebook.png',
         title: 'Facebook',
         category: ['HTML', 'CSS', 'JavaScript']
     },
     {
-        img: 'img-1.png',
+        img: 'portfolio.png',
         title: 'Portfolio',
         category: ['HTML', 'SCSS', 'JavaScript', 'Responsive']
     }
