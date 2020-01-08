@@ -120,7 +120,36 @@ function renderGallery( target, data ) {
 }
 
 function generateGalleryFilter( data ) {
-    return 'GALLERY FILTER';
+    let HTML = '<div class="filter-item">All categories</div>';
+    let list = [];
+    let uniqueList = [];
+
+    // // surenkame visas kategorijas i viena sarasa
+    // for ( let i=0; i<data.length; i++ ) {
+    //     const subList = data[i].category;
+
+    //     // atrenkame ir paliekame tik unikalias kategorijas is surinkto saraso
+    //     for ( let i=0; i<subList.length; i++ ) {
+    //         const category = subList[i];
+
+    //         if ( uniqueList.indexOf(category) === -1 ) {
+    //             uniqueList.push(category);
+    //         }
+    //     }
+    // }
+
+    for ( let i=0; i<data.length; i++ ) {
+        list = list.concat(data[i].category);
+    }
+    
+    uniqueList = list.filter( (cat, i) => list.indexOf(cat) === i );
+
+    // sukonstruojame HTML
+    for ( let i=0; i<uniqueList.length; i++ ) {
+        HTML += `<div class="filter-item">${uniqueList[i]}</div>`;
+    }
+    
+    return HTML;
 }
 
 function generateGalleryList( data ) {
@@ -147,3 +176,29 @@ function generateGalleryList( data ) {
 
     return HTML;
 }
+
+
+
+
+
+
+function sum(a, b) {
+    return a+b;
+}
+console.log( sum(5, 7) );
+
+const minus = function(a, b) {
+    return a-b;
+}
+console.log( minus(5, 7) );
+
+const multi = (a, b) => a*b;
+console.log( multi(5, 7) );
+
+
+const dvygubiname = a => 2*a;
+console.log( dvygubiname(8) );
+
+
+// function ()    {}
+//          () => {}

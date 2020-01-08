@@ -7,6 +7,13 @@
         display: inline-block;
         width: 100%;
         padding: 0 15px;
+
+        .filter-item {
+            display: inline-block;
+            float: left;
+            margin: 5px 15px;
+            
+        }
     }
 
     .gallery-list {
