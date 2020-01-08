@@ -115,34 +115,64 @@ function renderGallery( target, data ) {
     targetDOM.innerHTML = HTML;
 
     // sudeti eventListener ant filtravimo elementu
+    const filterItems = targetDOM.querySelectorAll('.filter-item');
+    const galleryItems = targetDOM.querySelectorAll('.gallery-item');
+    
+    for ( let i=0; i<filterItems.length; i++ ) {
+        // pridedam event listenerius
+        filterItems[i].addEventListener('click', (event) => {
+            // suzinome kas buvo paspaustas
+            const findWhat = event.target.textContent;
+
+            if ( findWhat === 'All categories' ) {
+                // ieskome kuriuose gallery-item elementuose yra paminetas findWhat
+                for ( let w=0; w<galleryItems.length; w++ ) {
+                    const work = galleryItems[w];
+                    work.classList.remove('hide');
+                }
+            } else {
+                // ieskome kuriuose gallery-item elementuose yra paminetas findWhat
+                for ( let w=0; w<galleryItems.length; w++ ) {
+                    const work = galleryItems[w];
+                    const categories = work.dataset.categories;
+    
+                    if ( categories.indexOf(findWhat) >= 0 ) {
+                        work.classList.remove('hide');
+                    } else {
+                        work.classList.add('hide');
+                    }
+                }
+            }
+        })
+    }
 
     return;
 }
 
 function generateGalleryFilter( data ) {
-    let HTML = '<div class="filter-item">All categories</div>';
+    let HTML = '<div class="filter-item active">All categories</div>';
     let list = [];
     let uniqueList = [];
 
-    // // surenkame visas kategorijas i viena sarasa
-    // for ( let i=0; i<data.length; i++ ) {
-    //     const subList = data[i].category;
-
-    //     // atrenkame ir paliekame tik unikalias kategorijas is surinkto saraso
-    //     for ( let i=0; i<subList.length; i++ ) {
-    //         const category = subList[i];
-
-    //         if ( uniqueList.indexOf(category) === -1 ) {
-    //             uniqueList.push(category);
-    //         }
-    //     }
-    // }
-
+    // surenkame visas kategorijas i viena sarasa
     for ( let i=0; i<data.length; i++ ) {
-        list = list.concat(data[i].category);
+        const subList = data[i].category;
+
+        // atrenkame ir paliekame tik unikalias kategorijas is surinkto saraso
+        for ( let i=0; i<subList.length; i++ ) {
+            const category = subList[i].toLowerCase();
+
+            if ( uniqueList.indexOf(category) === -1 ) {
+                uniqueList.push(category);
+            }
+        }
     }
+
+    // for ( let i=0; i<data.length; i++ ) {
+    //     list = list.concat(data[i].category);
+    // }
     
-    uniqueList = list.filter( (cat, i) => list.indexOf(cat) === i );
+    // uniqueList = list.filter( (cat, i) => list.indexOf(cat) === i );
 
     // sukonstruojame HTML
     for ( let i=0; i<uniqueList.length; i++ ) {
@@ -163,7 +193,8 @@ function generateGalleryList( data ) {
             catHTML += `<span class="cat">${work.category[c]}</span>`;
         }
         
-        HTML += `<div class="gallery-item">
+        HTML += `<div class="gallery-item"
+                    data-categories="${(''+work.category).toLowerCase()}">
                     <img src="./img/works/${work.img}">
                     <div class="texts">
                         <span class="title">${work.title}</span>
@@ -176,29 +207,3 @@ function generateGalleryList( data ) {
 
     return HTML;
 }
-
-
-
-
-
-
-function sum(a, b) {
-    return a+b;
-}
-console.log( sum(5, 7) );
-
-const minus = function(a, b) {
-    return a-b;
-}
-console.log( minus(5, 7) );
-
-const multi = (a, b) => a*b;
-console.log( multi(5, 7) );
-
-
-const dvygubiname = a => 2*a;
-console.log( dvygubiname(8) );
-
-
-// function ()    {}
-//          () => {}

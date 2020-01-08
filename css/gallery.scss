@@ -12,7 +12,13 @@
             display: inline-block;
             float: left;
             margin: 5px 15px;
-            
+            cursor: pointer;
+            text-transform: capitalize;
+
+            &:hover,
+            &.active {
+                color: var(--secondary-color);
+            }
         }
     }
 
@@ -28,6 +34,11 @@
             overflow: hidden;
             box-shadow: 0 2px 8px #0004;
             position: relative;
+            cursor: pointer;
+
+            &.hide {
+                display: none;
+            }
 
             img {
                 display: inline-block;

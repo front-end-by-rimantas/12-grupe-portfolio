@@ -72,17 +72,17 @@ const works = [
     {
         img: 'sign-up.png',
         title: 'Sign up',
-        category: ['HTML', 'CSS']
+        category: ['html', 'CSS']
     },
     {
         img: 'coming-soon.png',
         title: 'Coming soon',
-        category: ['HTML', 'CSS', 'Responsive']
+        category: ['HTML', 'css', 'Responsive']
     },
     {
         img: 'facebook.png',
         title: 'Facebook',
-        category: ['HTML', 'CSS', 'JavaScript']
+        category: ['HTML', 'CSS', 'Javascript']
     },
     {
         img: 'portfolio.png',
