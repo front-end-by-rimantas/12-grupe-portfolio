@@ -1,0 +1,57 @@
+.container > .row.jobs {
+    display: grid;
+    grid-template-areas:
+        ". .";
+    gap: 30px;
+}
+
+.job-item {
+    display: grid;
+    grid-template-areas:
+        "header button"
+        "paragraph paragraph";
+    gap: 20px;
+
+    padding: 20px;
+    background-color: var(--primary-light-color);
+    color: var(--primary-light-color-anti);
+    border-radius: 8px;
+
+    .header {
+        display: inline-block;
+        width: 100%;
+
+        .texts {
+            grid-area: header;
+
+
+            .job-title {
+                font-size: 24px;
+            }
+
+            .location {
+                font-size: 16px;
+            }
+        }
+
+        .btn {
+            grid-area: button;
+        }
+    }
+
+    p {
+        grid-area: paragraph;
+    }
+
+    &:hover {
+        background-color: var(--primary-color);
+        color: var(--primary-color-anti);
+    }
+}
+
+@media (max-width: 1100px) {
+    .container > .row.jobs {
+        grid-template-areas:
+            ".";
+    }
+}
