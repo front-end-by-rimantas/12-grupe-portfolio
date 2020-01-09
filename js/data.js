@@ -90,3 +90,26 @@ const works = [
         category: ['HTML', 'SCSS', 'JavaScript', 'Responsive']
     }
 ]
+
+const services = [
+    {
+        icon: 'diamond',
+        title: 'Web Design',
+        description: 'If you’re looking blank casvsettes on the web, you may confuse.'
+    },
+    {
+        icon: 'bar-chart',
+        title: 'App Development',
+        description: 'If you’re looking blank casvsettes on the web, you may confuse.'
+    },
+    {
+        icon: 'lightbulb-o',
+        title: 'Web Development',
+        description: 'If you’re looking blank casvsettes on the web, you may confuse.'
+    },
+    {
+        icon: 'dashboard',
+        title: 'Web Development',
+        description: 'If you’re looking blank casvsettes on the web, you may confuse.'
+    }
+]
