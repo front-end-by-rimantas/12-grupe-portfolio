@@ -118,3 +118,22 @@ function renderGallery( target, data ) {
 
     return;
 }
+
+function renderServices( target, data ) {
+    console.log(target);
+    
+    let HTML = '';
+
+    for ( let i=0; i<data.length; i++ ) {
+        const service = data[i];
+        HTML += `<div class="col-3 col-sm-6 col-xs-12 block">
+                    <i class="fa fa-${service.icon}"></i>
+                    <h4>${service.title}</h4>
+                    <span>${service.description}</span>
+                </div>`;
+    }
+
+    document.querySelector(target).innerHTML = HTML;
+
+    return;
+}

@@ -32,6 +32,16 @@
         font-size: 17px;
         line-height: 20px;
     }
+
+    > i + h4 {
+        margin-top: 20px;
+    }
+
+    > h4 + span {
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: normal;
+    }
 }
 
 @keyframes wave {
