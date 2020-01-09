@@ -57,3 +57,36 @@ const skills = [
         value: 60
     }
 ]
+
+const works = [
+    {
+        img: 'img-1.png',
+        title: 'Serlokas',
+        category: ['HTML', 'CSS']
+    },
+    {
+        img: 'img-1.png',
+        title: 'Mergaite',
+        category: ['HTML', 'CSS']
+    },
+    {
+        img: 'img-1.png',
+        title: 'Sign up',
+        category: ['HTML', 'CSS']
+    },
+    {
+        img: 'img-1.png',
+        title: 'Coming soon',
+        category: ['HTML', 'CSS', 'Responsive']
+    },
+    {
+        img: 'img-1.png',
+        title: 'Facebook',
+        category: ['HTML', 'CSS', 'JavaScript']
+    },
+    {
+        img: 'img-1.png',
+        title: 'Portfolio',
+        category: ['HTML', 'SCSS', 'JavaScript', 'Responsive']
+    }
+]
