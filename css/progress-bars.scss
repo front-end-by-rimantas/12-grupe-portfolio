@@ -1,0 +1,57 @@
+.progress-bar {
+    display: inline-block;
+    width: 100%;
+}
+    .progress-bar > .texts {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+        .progress-bar > .texts > .title {
+            display: inline-block;
+            float: left;
+        }
+        .progress-bar > .texts > .value {
+            display: inline-block;
+            float: right;
+        }
+    .progress-bar > .bar {
+        display: inline-block;
+        width: 100%;
+        height: 10px;
+        background-color: #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+        .progress-bar > .bar > .value {
+            display: inline-block;
+            width: 90%;
+            height: 100%;
+        }
+            .progress-bar > .bar > .value > .loading {
+                display: inline-block;
+                width: 50%;
+                height: 100%;
+                background-color: #03A9F3;
+                /* animation-name: loading;
+                animation-iteration-count: 1;
+                animation-duration: 10s;
+                animation-fill-mode: forwards;
+                animation-direction: alternate; */
+
+                animation: loading 2s ease-in-out 0s 1 normal forwards;
+            }
+
+@keyframes loading {
+    0% {
+        width: 0%;
+        border-radius: 0;
+    }
+    100% {
+        width: 100%;
+        border-radius: 5px;
+        background-color: #03A9F3;
+    }
+}
