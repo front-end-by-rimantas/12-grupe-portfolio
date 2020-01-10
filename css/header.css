@@ -1,1 +1,30 @@
-/* No CSS */
+#main_header {
+  padding: 5px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1;
+  -webkit-box-shadow: 0 2px 4px #0002;
+          box-shadow: 0 2px 4px #0002;
+}
+
+#main_header .logo {
+  display: inline-block;
+  float: left;
+  height: 50px;
+}
+
+#main_header nav {
+  display: inline-block;
+  float: right;
+}
+
+#main_header nav a {
+  display: inline-block;
+  float: left;
+  margin: 0 5px;
+  font-size: 20px;
+  line-height: 50px;
+}

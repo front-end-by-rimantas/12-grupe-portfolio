@@ -1,5 +1,17 @@
 "use strict";
 
+function renderHeaderNav() {
+    const sections = document.querySelectorAll('[data-nav]');
+    let HTML = '';
+
+    for ( let i=0; i<sections.length; i++ ) {
+        const link = sections[i].id;
+        HTML += `<a href="${link.indexOf('https://') === 0 ? '' : '#'}${link}">${sections[i].dataset.nav}</a>`;
+    }
+
+    return document.querySelector('header nav').innerHTML = HTML;
+}
+
 function renderAchievements( data ) {
     const maxBlocks = 4;
     let createdBlocks = 0;
@@ -206,6 +218,7 @@ function generateGalleryList( data ) {
     }
 
     return HTML;
+}
 
 function renderServices( target, data ) {
     let HTML = '';

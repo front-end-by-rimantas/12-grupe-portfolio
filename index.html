@@ -9,17 +9,24 @@
 </head>
 <body>
     <!-- header start -->
-    <div class="container">
+    <header id="main_header" class="container">
         <div class="row">
             <div class="col-12">
-                HEADER
+                <img class="logo" src="./img/logo.png">
+                <nav>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                </nav>
             </div>
         </div>
-    </div>
+    </header>
     <!-- header end -->
 
     <!-- hero start -->
-    <div class="container bg-primary">
+    <div id="home" class="container bg-primary" data-nav="Home">
         <div class="row">
             <div class="col-12">
                 HERO
@@ -39,7 +46,7 @@
     <!-- clients end -->
 
     <!-- about me start -->
-    <div id="about_me" class="container">
+    <div id="about_me" class="container" data-nav="About us">
         <div class="row">
             <div class="col-5 m-r-2 col-md-4 m-r-md-1 col-sm-12 m-r-sm-0">
                 <img src="./img/about-img.png" alt="">
@@ -68,7 +75,7 @@
     <!-- achievements end -->
 
     <!-- skills start -->
-    <div id="skills" class="container">
+    <div id="skills" class="container" data-nav="Skills">
         <div class="row">
             <div class="col-5 col-sm-12">
                 <h2 class="no-decoration">I got the skills</h2>
@@ -82,7 +89,7 @@
     <!-- skills end -->
 
     <!-- gallery start -->
-    <div id="latest_works" class="container bg-primary-light">
+    <div id="latest_works" class="container bg-primary-light" data-nav="Works">
         <div class="row">
             <div class="col-12">
                 <h2>Latest work</h2>
@@ -102,7 +109,7 @@
     <!-- gallery end -->
 
     <!-- job history start -->
-    <div class="container">
+    <div id="job_history" class="container" data-nav="History">
         <div class="row">
             <div class="col-12">
                 <h2>Job history</h2>
@@ -119,8 +126,10 @@
     </div>
     <!-- job history end -->
 
+    <div id="https://www.psl.com/blog" data-nav="Blog" style="display: none;"></div>
+
     <!-- services start -->
-    <div id="services" class="container bg-primary-light">
+    <div id="services" class="container bg-primary-light" data-nav="Service">
         <div class="row">
             <div class="col-12">
                 <h2>Service offers</h2>
@@ -153,7 +162,7 @@
     <!-- testimonials end -->
 
     <!-- contact me start -->
-    <div class="container bg-secondary text-center">
+    <div id="contact" class="container bg-secondary text-center" data-nav="Contact">
         <div class="row">
             <div class="col-12">
                 <h2 class="center">Contact me</h2>

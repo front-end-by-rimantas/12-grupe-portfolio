@@ -1,5 +1,7 @@
 "use strict";
 
+renderHeaderNav();
+
 renderAchievements( achievements );
 
 renderSkills( skills );
