@@ -1,6 +1,11 @@
 "use strict";
 
 function updateOnScroll() {
+    updateBackToTop();
+    updateSkills();
+}
+
+function updateBackToTop() {
     const height = window.scrollY;
     const screenHeight = window.innerHeight;
     const backToTopHeightLimit = 0.5;
@@ -10,6 +15,21 @@ function updateOnScroll() {
         backToTopDOM.classList.add('show');
     } else {
         backToTopDOM.classList.remove('show');
+    }
+}
+
+function updateSkills() {
+    const height = window.scrollY;
+    const screenHeight = window.innerHeight;
+    const progressBars = document.querySelectorAll('.progress-bar');
+    
+    for ( let i=0; i<progressBars.length; i++ ) {
+        const bar = progressBars[i];
+        const barPosition = bar.offsetTop;
+        
+        if ( height + screenHeight > barPosition ) {
+            bar.classList.add('animate');
+        }
     }
 }
 
