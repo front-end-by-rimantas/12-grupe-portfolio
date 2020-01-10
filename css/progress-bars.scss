@@ -1,12 +1,17 @@
 .progress-bar {
     display: inline-block;
     width: 100%;
+    
+    + .progress-bar {
+        margin-top: 40px;
+    }
 }
+
     .progress-bar > .texts {
         display: inline-block;
         width: 100%;
         margin-bottom: 10px;
-        font-size: 14px;
+        font-size: 20px;
         line-height: 20px;
     }
         .progress-bar > .texts > .title {
@@ -35,14 +40,11 @@
                 width: 50%;
                 height: 100%;
                 background-color: #03A9F3;
-                /* animation-name: loading;
-                animation-iteration-count: 1;
-                animation-duration: 10s;
-                animation-fill-mode: forwards;
-                animation-direction: alternate; */
-
-                animation: loading 2s ease-in-out 0s 1 normal forwards;
             }
+
+.progress-bar.animate .loading {
+    animation: loading 2s ease-in-out 0s 1 normal forwards;
+}
 
 @keyframes loading {
     0% {

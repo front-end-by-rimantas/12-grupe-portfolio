@@ -3,11 +3,15 @@
   width: 100%;
 }
 
+.progress-bar + .progress-bar {
+  margin-top: 40px;
+}
+
 .progress-bar > .texts {
   display: inline-block;
   width: 100%;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 20px;
 }
 
@@ -41,11 +45,9 @@
   width: 50%;
   height: 100%;
   background-color: #03A9F3;
-  /* animation-name: loading;
-                animation-iteration-count: 1;
-                animation-duration: 10s;
-                animation-fill-mode: forwards;
-                animation-direction: alternate; */
+}
+
+.progress-bar.animate .loading {
   -webkit-animation: loading 2s ease-in-out 0s 1 normal forwards;
           animation: loading 2s ease-in-out 0s 1 normal forwards;
 }
