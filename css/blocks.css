@@ -36,6 +36,16 @@
   line-height: 20px;
 }
 
+.block > i + h4 {
+  margin-top: 20px;
+}
+
+.block > h4 + span {
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: normal;
+}
+
 @-webkit-keyframes wave {
   0% {
     border-radius: 40% 50% 35% 45%;

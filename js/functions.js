@@ -206,4 +206,58 @@ function generateGalleryList( data ) {
     }
 
     return HTML;
+
+function renderServices( target, data ) {
+    let HTML = '';
+
+    for ( let i=0; i<data.length; i++ ) {
+        const service = data[i];
+        HTML += `<div class="col-3 col-sm-6 col-xs-12 block">
+                    <i class="fa fa-${service.icon}"></i>
+                    <h4>${service.title}</h4>
+                    <span>${service.description}</span>
+                </div>`;
+    }
+
+    document.querySelector(target).innerHTML = HTML;
+
+    return;
+}
+
+function renderJobs( target, data ) {
+    let HTML = '';
+
+    for ( let i=0; i<data.length; i++ ) {
+        HTML += generateJobBlock( data[i] );
+    }
+
+    document.querySelector(target).innerHTML = HTML;
+    
+    return;
+}
+
+function generateJobBlock( job ) {
+    let durationFrom = jobDateFormat( job.duration.from );
+    let durationTill = job.duration.till ? jobDateFormat( job.duration.till ) : 'Present';
+
+    return `<div class="job-item">
+                <div class="texts">
+                    <h4 class="job-title">${job.title}</h4>
+                    <div class="location">${job.location.city}, ${job.location.country}</div>
+                </div>
+                <div class="btn">
+                    <span>${durationFrom}</span>
+                    <span>to</span>
+                    <span>${durationTill}</span>
+                </div>
+                <p>${job.description}</p>
+            </div>`;
+}
+
+function jobDateFormat( date ) {
+    const d = new Date(date.year, date.month-1, 1); 
+    const year = date.year % 100;
+    const month = d.toLocaleString('default', { month: 'short' });
+    
+    return `${month}'${year === 0 ? '00' : year}`;
 }
