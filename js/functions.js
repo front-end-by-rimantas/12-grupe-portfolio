@@ -1,5 +1,50 @@
 "use strict";
 
+function updateOnScroll() {
+    updateBackToTop();
+    updateSkills();
+}
+
+function updateBackToTop() {
+    const height = window.scrollY;
+    const screenHeight = window.innerHeight;
+    const backToTopHeightLimit = 0.5;
+    const backToTopDOM = document.querySelector('.back-to-top');
+    
+    if ( height >= backToTopHeightLimit * screenHeight ) {
+        backToTopDOM.classList.add('show');
+    } else {
+        backToTopDOM.classList.remove('show');
+    }
+}
+
+function updateSkills() {
+    const height = window.scrollY;
+    const screenHeight = window.innerHeight;
+    const progressBars = document.querySelectorAll('.progress-bar');
+    
+    for ( let i=0; i<progressBars.length; i++ ) {
+        const bar = progressBars[i];
+        const barPosition = bar.offsetTop;
+        
+        if ( height + screenHeight > barPosition ) {
+            bar.classList.add('animate');
+        }
+    }
+}
+
+function renderHeaderNav() {
+    const sections = document.querySelectorAll('[data-nav]');
+    let HTML = '';
+
+    for ( let i=0; i<sections.length; i++ ) {
+        const link = sections[i].id;
+        HTML += `<a href="${link.indexOf('https://') === 0 ? '' : '#'}${link}">${sections[i].dataset.nav}</a>`;
+    }
+
+    return document.querySelector('header nav').innerHTML = HTML;
+}
+
 function renderAchievements( data ) {
     const maxBlocks = 4;
     let createdBlocks = 0;
@@ -206,6 +251,7 @@ function generateGalleryList( data ) {
     }
 
     return HTML;
+}
 
 function renderServices( target, data ) {
     let HTML = '';

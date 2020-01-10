@@ -13,6 +13,10 @@
   color: var(--primary-light-color-anti);
 }
 
+.container-min-height {
+  min-height: 100vh;
+}
+
 .text-center {
   text-align: center;
 }
@@ -78,4 +82,22 @@ h2.center::after {
 
 #about_me img {
   width: 100%;
+}
+
+.back-to-top {
+  display: none;
+  padding: 10px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: var(--primary-color-anti);
+  border-radius: 5px 5px 0 0;
+}
+
+.back-to-top.show {
+  display: inline-block;
 }
