@@ -1,5 +1,18 @@
 "use strict";
 
+function updateOnScroll() {
+    const height = window.scrollY;
+    const screenHeight = window.innerHeight;
+    const backToTopHeightLimit = 0.5;
+    const backToTopDOM = document.querySelector('.back-to-top');
+    
+    if ( height >= backToTopHeightLimit * screenHeight ) {
+        backToTopDOM.classList.add('show');
+    } else {
+        backToTopDOM.classList.remove('show');
+    }
+}
+
 function renderHeaderNav() {
     const sections = document.querySelectorAll('[data-nav]');
     let HTML = '';
