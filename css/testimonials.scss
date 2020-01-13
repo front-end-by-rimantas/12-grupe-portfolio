@@ -1,0 +1,43 @@
+.testimonials {
+    display: inline-block;
+    width: 100%;
+
+    .testimonial {
+        display: inline-block;
+        width: 50%;
+        margin: 0 25%;
+
+        > * {
+            display: inline-block;
+            width: 100%;
+        }
+        .quote {
+            margin-bottom: 40px;
+            font-family: cursive;
+            font-size: 40px;
+            line-height: 40px;
+            color: #ddd;
+        }
+        .author {
+            margin-bottom: 10px;
+            font-size: 24px;
+            line-height: 30px;
+            color: #333;
+            font-weight: bold;
+        }
+        .stars {
+            margin-bottom: 40px;
+
+            i {
+                font-size: 18px;
+                line-height: 20px;
+                color: #f93;
+            }
+        }
+        .text {
+            font-size: 18px;
+            line-height: 20px;
+            color: #555;
+        }
+    }
+}

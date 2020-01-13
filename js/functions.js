@@ -307,3 +307,39 @@ function jobDateFormat( date ) {
     
     return `${month}'${year === 0 ? '00' : year}`;
 }
+
+function renderTestimonials( target, data ) {
+    let HTML = '';
+
+    // for ( let i=0; i<data.length; i++ ) {
+    //     HTML += generateTestimonial(data[i]);
+    // }
+    
+    const random = Math.floor( Math.random() * data.length );
+    HTML = generateTestimonial(data[ random ]);
+
+    document.querySelector(target).innerHTML = HTML;
+
+    return;
+}
+
+function generateTestimonial( data ) {
+    const fullStars = Math.round(data.stars * 2) / 2;
+    const fullHTML = '<i class="fa fa-star"></i>'.repeat( Math.floor(fullStars) );
+    const halfHTML = '<i class="fa fa-star-half-o"></i>'.repeat( fullStars%1 === 0 ? 0 : 1 );
+    const emptyHTML = '<i class="fa fa-star-o"></i>'.repeat( 5 - Math.ceil(fullStars) );
+
+    return `<div class="testimonial">
+                <div class="quote">99</div>
+                <div class="author">${data.author}</div>
+                <div class="stars">${fullHTML + halfHTML + emptyHTML}</div>
+                <div class="text">${data.text}</div>
+            </div>`;
+}
+
+
+
+// min: 0
+// max: 5 * 2
+// dave: 2.3 * 2
+//          4.6 -> 5 / 2 -> 2.5
