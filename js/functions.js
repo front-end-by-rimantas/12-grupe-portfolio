@@ -311,21 +311,27 @@ function jobDateFormat( date ) {
 function renderTestimonials( target, data ) {
     const DOM = document.querySelector(target);
     let testimonialsHTML = '';
-
-    // for ( let i=0; i<data.length; i++ ) {
-    //     testimonialsHTML += generateTestimonial(data[i]);
-    // }
     
+    // atnaujiname duomenis: klonai pirmas gale ir paskutinis priekyje
+    // data.push(data[0]);
+    // data.unshift(data[data.length-2]);
+    data = [ data[data.length-1], ...data, data[0] ];
     const middleIndex = Math.floor(data.length / 2);
-    testimonialsHTML = generateTestimonial(data[ middleIndex ]);
+
+    for ( let i=0; i<data.length; i++ ) {
+        testimonialsHTML += generateTestimonial(data[i]);
+    }
 
     const HTML = `<div class="testimonials" data-index="${middleIndex}">
-                    <div class="list">${testimonialsHTML}</div>
+                    <div class="list"
+                        style="width: ${data.length}00%;
+                            margin-left: -${middleIndex}00%;">${testimonialsHTML}</div>
                     <div class="controls">
                         <i class="fa fa-angle-left"></i>
                         <div class="line">
                             <div class="bar"
-                                style="margin-left: ${middleIndex * 100 / data.length}%;"></div>
+                                style="margin-left: ${(middleIndex - 1) * 100 / (data.length - 2)}%;
+                                    width: ${100 / (data.length - 2)}%;"></div>
                         </div>
                         <i class="fa fa-angle-right"></i>
                     </div>
@@ -335,8 +341,6 @@ function renderTestimonials( target, data ) {
     
     const arrows = DOM.querySelectorAll('.controls > .fa');
     arrows.forEach( arrow => arrow.addEventListener('click', updateTestimonials) );
-    
-
     return;
 }
 
@@ -346,7 +350,7 @@ function generateTestimonial( data ) {
     const halfHTML = '<i class="fa fa-star-half-o"></i>'.repeat( fullStars%1 === 0 ? 0 : 1 );
     const emptyHTML = '<i class="fa fa-star-o"></i>'.repeat( 5 - Math.ceil(fullStars) );
 
-    return `<div class="testimonial">
+    return `<div class="testimonial" style="width: 20%;">
                 <div class="quote">99</div>
                 <div class="author">${data.author}</div>
                 <div class="stars">${fullHTML + halfHTML + emptyHTML}</div>
@@ -355,24 +359,17 @@ function generateTestimonial( data ) {
 }
 
 function updateTestimonials( event ) {
-    const element = event.target;
-    const parent = element.closest('.testimonials');
+    const elem = event.target;
+    const parent = elem.closest('.testimonials');
+    const list = parent.querySelector('.list');
+    const currentIndex = parseInt(parent.dataset.index);
+
     let direction = 1;
-    if ( element.classList.contains('fa-angle-left') ) {
+    if ( elem.classList.contains('fa-angle-left') ) {
         direction = -1;
     }
-    
-    const currentIndex = parseInt(parent.dataset.index);
     let nextIndex = currentIndex + direction;
-    // jei nextIndex = -1, tai varom i gala
-    if ( nextIndex === -1 ) {
-        nextIndex = testimonials.length - 1;
-    }
-    // jei nextIndex = testimonials.length, tai varom i pradzia
-    if ( nextIndex === testimonials.length ) {
-        nextIndex = 0;
-    }
-
+    
     parent.setAttribute('data-index', nextIndex);
-    parent.querySelector('.list').innerHTML = generateTestimonial(testimonials[nextIndex]);
+    list.style.marginLeft = nextIndex * -100 + '%';
 }

@@ -1,10 +1,16 @@
 .testimonials {
     display: inline-block;
     width: 100%;
+    overflow: hidden;
 
     .list {
         display: inline-block;
         width: 100%;
+        transition: all 1s;
+
+        &.no-animation {
+            transition: unset;
+        }
     }
 
     .controls {
@@ -38,7 +44,7 @@
     .testimonial {
         display: inline-block;
         width: 50%;
-        margin: 0 25%;
+        float: left;
 
         > * {
             display: inline-block;

@@ -1,11 +1,19 @@
 .testimonials {
   display: inline-block;
   width: 100%;
+  overflow: hidden;
 }
 
 .testimonials .list {
   display: inline-block;
   width: 100%;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.testimonials .list.no-animation {
+  -webkit-transition: unset;
+  transition: unset;
 }
 
 .testimonials .controls {
@@ -40,7 +48,7 @@
 .testimonials .testimonial {
   display: inline-block;
   width: 50%;
-  margin: 0 25%;
+  float: left;
 }
 
 .testimonials .testimonial > * {
