@@ -84,6 +84,13 @@ h2.center::after {
   width: 100%;
 }
 
+#about_me p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
 .back-to-top {
   display: none;
   padding: 10px;
