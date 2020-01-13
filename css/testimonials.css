@@ -3,6 +3,40 @@
   width: 100%;
 }
 
+.testimonials .list {
+  display: inline-block;
+  width: 100%;
+}
+
+.testimonials .controls {
+  display: inline-block;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.testimonials .controls .fa {
+  padding: 10px 15px;
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.testimonials .controls .line {
+  display: inline-block;
+  width: 120px;
+  height: 4px;
+  margin: 18px 20px;
+  background-color: #ccc;
+}
+
+.testimonials .controls .line .bar {
+  display: inline-block;
+  width: calc(100% / 3);
+  height: 100%;
+  float: left;
+  background-color: var(--secondary-color);
+}
+
 .testimonials .testimonial {
   display: inline-block;
   width: 50%;

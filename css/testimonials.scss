@@ -2,6 +2,39 @@
     display: inline-block;
     width: 100%;
 
+    .list {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .controls {
+        display: inline-block;
+        width: 100%;
+        margin-top: 40px;
+
+        .fa {
+            padding: 10px 15px;
+            font-size: 20px;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        .line {
+            display: inline-block;
+            width: 120px;
+            height: 4px;
+            margin: 18px 20px;
+            background-color: #ccc;
+
+            .bar {
+                display: inline-block;
+                width: calc(100% / 3);
+                height: 100%;
+                float: left;
+                background-color: var(--secondary-color);
+            }
+        }
+    }
+
     .testimonial {
         display: inline-block;
         width: 50%;

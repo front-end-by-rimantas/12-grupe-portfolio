@@ -309,16 +309,33 @@ function jobDateFormat( date ) {
 }
 
 function renderTestimonials( target, data ) {
-    let HTML = '';
+    const DOM = document.querySelector(target);
+    let testimonialsHTML = '';
 
     // for ( let i=0; i<data.length; i++ ) {
-    //     HTML += generateTestimonial(data[i]);
+    //     testimonialsHTML += generateTestimonial(data[i]);
     // }
     
-    const random = Math.floor( Math.random() * data.length );
-    HTML = generateTestimonial(data[ random ]);
+    const middleIndex = Math.floor(data.length / 2);
+    testimonialsHTML = generateTestimonial(data[ middleIndex ]);
 
-    document.querySelector(target).innerHTML = HTML;
+    const HTML = `<div class="testimonials" data-index="${middleIndex}">
+                    <div class="list">${testimonialsHTML}</div>
+                    <div class="controls">
+                        <i class="fa fa-angle-left"></i>
+                        <div class="line">
+                            <div class="bar"
+                                style="margin-left: ${middleIndex * 100 / data.length}%;"></div>
+                        </div>
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                </div>`;
+
+    DOM.innerHTML = HTML;
+    
+    const arrows = DOM.querySelectorAll('.controls > .fa');
+    arrows.forEach( arrow => arrow.addEventListener('click', updateTestimonials) );
+    
 
     return;
 }
@@ -337,9 +354,25 @@ function generateTestimonial( data ) {
             </div>`;
 }
 
+function updateTestimonials( event ) {
+    const element = event.target;
+    const parent = element.closest('.testimonials');
+    let direction = 1;
+    if ( element.classList.contains('fa-angle-left') ) {
+        direction = -1;
+    }
+    
+    const currentIndex = parseInt(parent.dataset.index);
+    let nextIndex = currentIndex + direction;
+    // jei nextIndex = -1, tai varom i gala
+    if ( nextIndex === -1 ) {
+        nextIndex = testimonials.length - 1;
+    }
+    // jei nextIndex = testimonials.length, tai varom i pradzia
+    if ( nextIndex === testimonials.length ) {
+        nextIndex = 0;
+    }
 
-
-// min: 0
-// max: 5 * 2
-// dave: 2.3 * 2
-//          4.6 -> 5 / 2 -> 2.5
+    parent.setAttribute('data-index', nextIndex);
+    parent.querySelector('.list').innerHTML = generateTestimonial(testimonials[nextIndex]);
+}
