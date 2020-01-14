@@ -15,3 +15,5 @@ renderJobs( '#job_history_blocks', jobHistory );
 window.addEventListener('scroll', updateOnScroll);
 
 renderTestimonials('#testimonials_block', testimonials);
+
+autoCounter();
