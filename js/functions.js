@@ -307,3 +307,112 @@ function jobDateFormat( date ) {
     
     return `${month}'${year === 0 ? '00' : year}`;
 }
+
+function renderTestimonials( target, data ) {
+    const DOM = document.querySelector(target);
+    let testimonialsHTML = '';
+    
+    // atnaujiname duomenis: klonai pirmas gale ir paskutinis priekyje
+    // data.push(data[0]);
+    // data.unshift(data[data.length-2]);
+    data = [ data[data.length-1], ...data, data[0] ];
+    const middleIndex = Math.floor(data.length / 2);
+
+    for ( let i=0; i<data.length; i++ ) {
+        testimonialsHTML += generateTestimonial(data[i]);
+    }
+
+    const HTML = `<div class="testimonials" data-index="${middleIndex}">
+                    <div class="list"
+                        style="width: ${data.length}00%;
+                            margin-left: -${middleIndex}00%;">${testimonialsHTML}</div>
+                    <div class="controls">
+                        <i class="fa fa-angle-left"></i>
+                        <div class="line">
+                            <div class="bar"
+                                style="margin-left: ${(middleIndex - 1) * 100 / (data.length - 2)}%;
+                                    width: ${100 / (data.length - 2)}%;"></div>
+                        </div>
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                </div>`;
+
+    DOM.innerHTML = HTML;
+    
+    const arrows = DOM.querySelectorAll('.controls > .fa');
+    arrows.forEach( arrow => arrow.addEventListener('click', updateTestimonials) );
+    return;
+}
+
+function generateTestimonial( data ) {
+    const fullStars = Math.round(data.stars * 2) / 2;
+    const fullHTML = '<i class="fa fa-star"></i>'.repeat( Math.floor(fullStars) );
+    const halfHTML = '<i class="fa fa-star-half-o"></i>'.repeat( fullStars%1 === 0 ? 0 : 1 );
+    const emptyHTML = '<i class="fa fa-star-o"></i>'.repeat( 5 - Math.ceil(fullStars) );
+
+    return `<div class="testimonial" style="width: 20%;">
+                <div class="quote">99</div>
+                <div class="author">${data.author}</div>
+                <div class="stars">${fullHTML + halfHTML + emptyHTML}</div>
+                <div class="text">${data.text}</div>
+            </div>`;
+}
+
+function updateTestimonials( event ) {
+    if ( testimonialsAnimationInProgress === true ) {
+        return;
+    }
+    testimonialsAnimationInProgress = true;
+    const elem = event.target;
+    const parent = elem.closest('.testimonials');
+    const list = parent.querySelector('.list');
+    const bar = parent.querySelector('.bar');
+    const currentIndex = parseInt(parent.dataset.index);
+
+    let direction = 1;
+    if ( elem.classList.contains('fa-angle-left') ) {
+        direction = -1;
+    }
+    let nextIndex = currentIndex + direction;
+    
+    parent.setAttribute('data-index', nextIndex);
+    list.style.marginLeft = nextIndex * -100 + '%';
+
+    // jei i ekrana ivaziuoja "klonai", tai juos "teleportuojame"
+    if ( nextIndex === 0 ) {
+        setTimeout(() => {
+            list.classList.add('no-animation');
+            nextIndex = testimonials.length;
+            parent.setAttribute('data-index', nextIndex);
+            list.style.marginLeft = testimonials.length * -100 + '%';
+        }, 1000);
+        setTimeout(() => {
+            list.classList.remove('no-animation');
+        }, 1100)
+    }
+    if ( nextIndex === testimonials.length + 1 ) {
+        setTimeout(() => {
+            list.classList.add('no-animation');
+            nextIndex = 1;
+            parent.setAttribute('data-index', nextIndex);
+            list.style.marginLeft = -100 + '%';
+        }, 1000);
+        setTimeout(() => {
+            list.classList.remove('no-animation');
+        }, 1100)
+    }
+
+    let barIndex = nextIndex;
+    if ( nextIndex === 0 ) {
+        barIndex = testimonials.length;
+    }
+    if ( nextIndex === testimonials.length + 1 ) {
+        barIndex = 1;
+    }
+    bar.style.marginLeft = (barIndex - 1) * (100 / testimonials.length) + '%';
+    
+
+    setTimeout(() => {
+        testimonialsAnimationInProgress = false;
+    }, 1100);
+}

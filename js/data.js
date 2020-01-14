@@ -176,3 +176,22 @@ const jobHistory = [
         }
     }
 ]
+
+let testimonialsAnimationInProgress = false;
+const testimonials = [
+    {
+        author: 'Chuck Norris 👮‍♂️',
+        stars: 5,
+        text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    },
+    {
+        author: 'Jean Claude van Damme ☁',
+        stars: 4,
+        text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    },
+    {
+        author: 'Bruce Lee 💪',
+        stars: 2.5,
+        text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    }
+]

@@ -1,0 +1,83 @@
+.testimonials {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+
+    .list {
+        display: inline-block;
+        width: 100%;
+        transition: all 1s;
+
+        &.no-animation {
+            transition: unset;
+        }
+    }
+
+    .controls {
+        display: inline-block;
+        width: 100%;
+        margin-top: 40px;
+
+        .fa {
+            padding: 10px 15px;
+            font-size: 20px;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        .line {
+            display: inline-block;
+            width: 120px;
+            height: 4px;
+            margin: 18px 20px;
+            background-color: #ccc;
+
+            .bar {
+                display: inline-block;
+                width: calc(100% / 3);
+                height: 100%;
+                float: left;
+                background-color: var(--secondary-color);
+                // transition: all 0.2s;
+            }
+        }
+    }
+
+    .testimonial {
+        display: inline-block;
+        width: 50%;
+        float: left;
+
+        > * {
+            display: inline-block;
+            width: 100%;
+        }
+        .quote {
+            margin-bottom: 40px;
+            font-family: cursive;
+            font-size: 40px;
+            line-height: 40px;
+            color: #ddd;
+        }
+        .author {
+            margin-bottom: 10px;
+            font-size: 24px;
+            line-height: 30px;
+            color: #333;
+            font-weight: bold;
+        }
+        .stars {
+            margin-bottom: 40px;
+
+            i {
+                font-size: 18px;
+                line-height: 20px;
+                color: #f93;
+            }
+        }
+        .text {
+            font-size: 18px;
+            line-height: 20px;
+            color: #555;
+        }
+    }
+}
