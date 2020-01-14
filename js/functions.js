@@ -359,9 +359,14 @@ function generateTestimonial( data ) {
 }
 
 function updateTestimonials( event ) {
+    if ( testimonialsAnimationInProgress === true ) {
+        return;
+    }
+    testimonialsAnimationInProgress = true;
     const elem = event.target;
     const parent = elem.closest('.testimonials');
     const list = parent.querySelector('.list');
+    const bar = parent.querySelector('.bar');
     const currentIndex = parseInt(parent.dataset.index);
 
     let direction = 1;
@@ -372,4 +377,42 @@ function updateTestimonials( event ) {
     
     parent.setAttribute('data-index', nextIndex);
     list.style.marginLeft = nextIndex * -100 + '%';
+
+    // jei i ekrana ivaziuoja "klonai", tai juos "teleportuojame"
+    if ( nextIndex === 0 ) {
+        setTimeout(() => {
+            list.classList.add('no-animation');
+            nextIndex = testimonials.length;
+            parent.setAttribute('data-index', nextIndex);
+            list.style.marginLeft = testimonials.length * -100 + '%';
+        }, 1000);
+        setTimeout(() => {
+            list.classList.remove('no-animation');
+        }, 1100)
+    }
+    if ( nextIndex === testimonials.length + 1 ) {
+        setTimeout(() => {
+            list.classList.add('no-animation');
+            nextIndex = 1;
+            parent.setAttribute('data-index', nextIndex);
+            list.style.marginLeft = -100 + '%';
+        }, 1000);
+        setTimeout(() => {
+            list.classList.remove('no-animation');
+        }, 1100)
+    }
+
+    let barIndex = nextIndex;
+    if ( nextIndex === 0 ) {
+        barIndex = testimonials.length;
+    }
+    if ( nextIndex === testimonials.length + 1 ) {
+        barIndex = 1;
+    }
+    bar.style.marginLeft = (barIndex - 1) * (100 / testimonials.length) + '%';
+    
+
+    setTimeout(() => {
+        testimonialsAnimationInProgress = false;
+    }, 1100);
 }

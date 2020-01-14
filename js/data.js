@@ -177,6 +177,7 @@ const jobHistory = [
     }
 ]
 
+let testimonialsAnimationInProgress = false;
 const testimonials = [
     {
         author: 'Chuck Norris 👮‍♂️',
