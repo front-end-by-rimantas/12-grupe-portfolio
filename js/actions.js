@@ -1,6 +1,7 @@
 "use strict";
 
 renderHeaderNav();
+headerActions();
 
 renderAchievements( achievements );
 

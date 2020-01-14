@@ -18,6 +18,22 @@ function updateBackToTop() {
     }
 }
 
+function headerActions() {
+    const hamburger = document.querySelector('#main_header .mobile-menu');
+    const headerNav = document.querySelector('#main_header nav');
+    const headerNavLinks = headerNav.querySelectorAll('a');
+
+    hamburger.addEventListener('click', () => {
+        headerNav.classList.toggle('on-mobile');
+    })
+
+    headerNavLinks.forEach( link => {
+        link.addEventListener('click', () => {
+            headerNav.classList.remove('on-mobile');
+        })
+    })
+}
+
 function updateSkills() {
     const height = window.scrollY;
     const screenHeight = window.innerHeight;
