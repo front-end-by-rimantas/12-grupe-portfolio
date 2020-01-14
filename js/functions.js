@@ -257,7 +257,8 @@ function generateGalleryList( data ) {
         }
         
         HTML += `<div class="gallery-item"
-                    data-categories="${(''+work.category).toLowerCase()}">
+                    data-categories="${(''+work.category).toLowerCase()}"
+                    data-lightbox="img">
                     <img src="./img/works/${work.img}">
                     <div class="texts">
                         <span class="title">${work.title}</span>
@@ -457,4 +458,51 @@ function autoCounter() {
             }
         }, speed);
     }
+}
+
+function lightbox() {
+    const elements = document.querySelectorAll('[data-lightbox]');
+    
+    elements.forEach( elem => {
+        elem.addEventListener('click', updateLightbox)
+    })
+}
+
+function updateLightbox( event ) {
+    let lightboxDOM = document.querySelector('.lightbox');
+    let lightboxImg = null;
+
+    // jei lightbox'os dar nera - sukuriame
+    if ( !lightboxDOM ) {
+        const HTML = `
+            <div class="lightbox">
+                <div class="background"></div>
+                <div class="content">
+                    <img src="#">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>`;
+        document.querySelector('body')
+            .insertAdjacentHTML('beforeend', HTML);
+        lightboxDOM = document.querySelector('.lightbox');
+        lightboxImg = lightboxDOM.querySelector('img');
+        lightboxDOM.querySelector('.background')
+            .addEventListener('click', () => {
+                lightboxDOM.classList.add('hide');
+            })
+        lightboxDOM.querySelector('i')
+            .addEventListener('click', () => {
+                lightboxDOM.classList.add('hide');
+            })
+    } else {
+        lightboxDOM.classList.remove('hide');
+    }
+    
+    const item = event.target.closest('[data-lightbox]');
+    const image = item.dataset.lightbox;
+    const imageSrc = item.querySelector(image).src;
+    lightboxImg.src = imageSrc;
+    // console.log(imageSrc);
+    
+    
 }

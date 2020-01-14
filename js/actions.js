@@ -18,3 +18,5 @@ window.addEventListener('scroll', updateOnScroll);
 renderTestimonials('#testimonials_block', testimonials);
 
 autoCounter();
+
+lightbox();
