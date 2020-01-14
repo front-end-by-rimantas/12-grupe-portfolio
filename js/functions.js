@@ -76,7 +76,9 @@ function renderAchievements( data ) {
              (block.title || (typeof(block.title) === 'string' && block.title.length > 0)) ) {
             HTML += `<div class="col-3 col-sm-6 col-xs-12 block">
                         <i class="fa fa-${block.icon}"></i>
-                        <span>${block.number}</span>
+                        <span data-counter-from="0"
+                            data-counter-to="${block.number}"
+                            data-counter-time="2000">${block.number}</span>
                         <h4>${block.title}</h4>
                     </div>`;
             
@@ -415,4 +417,28 @@ function updateTestimonials( event ) {
     setTimeout(() => {
         testimonialsAnimationInProgress = false;
     }, 1100);
+}
+
+function autoCounter() {
+    const elements = document.querySelectorAll('[data-counter-from]');
+    const speed = 1000 / 24;
+    
+    for ( let i=0; i<elements.length; i++ ) {
+        let step = 0;
+        const elem = elements[i];
+        const from = parseFloat(elem.dataset.counterFrom);
+        const to = parseFloat(elem.dataset.counterTo);
+        const time = parseFloat(elem.dataset.counterTime);
+        const totalSteps = Math.ceil(time / speed) + 1;
+        
+        elem.textContent = from;
+        
+        const timer = setInterval(() => {
+            step++;
+            elem.textContent = Math.round((to - from) / totalSteps * step);
+            if ( step === totalSteps ) {
+                clearInterval( timer );
+            }
+        }, speed);
+    }
 }
