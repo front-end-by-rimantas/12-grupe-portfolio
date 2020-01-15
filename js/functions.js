@@ -471,6 +471,9 @@ function lightbox() {
 function updateLightbox( event ) {
     let lightboxDOM = document.querySelector('.lightbox');
     let lightboxImg = null;
+    if ( lightboxDOM ) {
+        lightboxImg = lightboxDOM.querySelector('img');
+    }
 
     // jei lightbox'os dar nera - sukuriame
     if ( !lightboxDOM ) {
@@ -500,9 +503,11 @@ function updateLightbox( event ) {
     
     const item = event.target.closest('[data-lightbox]');
     const image = item.dataset.lightbox;
-    const imageSrc = item.querySelector(image).src;
+    let imageSrc = '';
+    if ( image === '' ) {
+        imageSrc = item.src;
+    } else {
+        imageSrc = item.querySelector(image).src;
+    }
     lightboxImg.src = imageSrc;
-    // console.log(imageSrc);
-    
-    
 }
