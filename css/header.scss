@@ -25,5 +25,42 @@
             font-size: 20px;
             line-height: 50px;
         }
+
+    }
+
+    .mobile-menu {
+        display: none;
+        float: right;
+        width: 50px;
+        font-size: 20px;
+        text-align: center;
+        line-height: 50px;
+    }
+}
+
+@media (max-width: 900px) {
+    #main_header {
+        nav {
+            display: none;
+
+            &.on-mobile {
+                display: inline-block;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #fffc;
+    
+                a {
+                    width: 100%;
+                    padding: 0 20px;
+                    text-align: center;
+                }
+            }
+        }
+        .mobile-menu {
+            display: inline-block;
+        }
     }
 }

@@ -87,8 +87,17 @@ h2 {
 // clients
 
 // about me
-#about_me img {
-    width: 100%;
+#about_me {
+    img {
+        width: 100%;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 22px;
+        color: #555;
+        margin-bottom: 20px;
+    }
 }
 
 // achievements

@@ -18,6 +18,22 @@ function updateBackToTop() {
     }
 }
 
+function headerActions() {
+    const hamburger = document.querySelector('#main_header .mobile-menu');
+    const headerNav = document.querySelector('#main_header nav');
+    const headerNavLinks = headerNav.querySelectorAll('a');
+
+    hamburger.addEventListener('click', () => {
+        headerNav.classList.toggle('on-mobile');
+    })
+
+    headerNavLinks.forEach( link => {
+        link.addEventListener('click', () => {
+            headerNav.classList.remove('on-mobile');
+        })
+    })
+}
+
 function updateSkills() {
     const height = window.scrollY;
     const screenHeight = window.innerHeight;
@@ -76,7 +92,9 @@ function renderAchievements( data ) {
              (block.title || (typeof(block.title) === 'string' && block.title.length > 0)) ) {
             HTML += `<div class="col-3 col-sm-6 col-xs-12 block">
                         <i class="fa fa-${block.icon}"></i>
-                        <span>${block.number}</span>
+                        <span data-counter-from="0"
+                            data-counter-to="${block.number}"
+                            data-counter-time="2000">${block.number}</span>
                         <h4>${block.title}</h4>
                     </div>`;
             
@@ -239,7 +257,8 @@ function generateGalleryList( data ) {
         }
         
         HTML += `<div class="gallery-item"
-                    data-categories="${(''+work.category).toLowerCase()}">
+                    data-categories="${(''+work.category).toLowerCase()}"
+                    data-lightbox="img">
                     <img src="./img/works/${work.img}">
                     <div class="texts">
                         <span class="title">${work.title}</span>
@@ -306,4 +325,189 @@ function jobDateFormat( date ) {
     const month = d.toLocaleString('default', { month: 'short' });
     
     return `${month}'${year === 0 ? '00' : year}`;
+}
+
+function renderTestimonials( target, data ) {
+    const DOM = document.querySelector(target);
+    let testimonialsHTML = '';
+    
+    // atnaujiname duomenis: klonai pirmas gale ir paskutinis priekyje
+    // data.push(data[0]);
+    // data.unshift(data[data.length-2]);
+    data = [ data[data.length-1], ...data, data[0] ];
+    const middleIndex = Math.floor(data.length / 2);
+
+    for ( let i=0; i<data.length; i++ ) {
+        testimonialsHTML += generateTestimonial(data[i]);
+    }
+
+    const HTML = `<div class="testimonials" data-index="${middleIndex}">
+                    <div class="list"
+                        style="width: ${data.length}00%;
+                            margin-left: -${middleIndex}00%;">${testimonialsHTML}</div>
+                    <div class="controls">
+                        <i class="fa fa-angle-left"></i>
+                        <div class="line">
+                            <div class="bar"
+                                style="margin-left: ${(middleIndex - 1) * 100 / (data.length - 2)}%;
+                                    width: ${100 / (data.length - 2)}%;"></div>
+                        </div>
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                </div>`;
+
+    DOM.innerHTML = HTML;
+    
+    const arrows = DOM.querySelectorAll('.controls > .fa');
+    arrows.forEach( arrow => arrow.addEventListener('click', updateTestimonials) );
+    return;
+}
+
+function generateTestimonial( data ) {
+    const fullStars = Math.round(data.stars * 2) / 2;
+    const fullHTML = '<i class="fa fa-star"></i>'.repeat( Math.floor(fullStars) );
+    const halfHTML = '<i class="fa fa-star-half-o"></i>'.repeat( fullStars%1 === 0 ? 0 : 1 );
+    const emptyHTML = '<i class="fa fa-star-o"></i>'.repeat( 5 - Math.ceil(fullStars) );
+
+    return `<div class="testimonial" style="width: 20%;">
+                <div class="quote">99</div>
+                <div class="author">${data.author}</div>
+                <div class="stars">${fullHTML + halfHTML + emptyHTML}</div>
+                <div class="text">${data.text}</div>
+            </div>`;
+}
+
+function updateTestimonials( event ) {
+    if ( testimonialsAnimationInProgress === true ) {
+        return;
+    }
+    testimonialsAnimationInProgress = true;
+    const elem = event.target;
+    const parent = elem.closest('.testimonials');
+    const list = parent.querySelector('.list');
+    const bar = parent.querySelector('.bar');
+    const currentIndex = parseInt(parent.dataset.index);
+
+    let direction = 1;
+    if ( elem.classList.contains('fa-angle-left') ) {
+        direction = -1;
+    }
+    let nextIndex = currentIndex + direction;
+    
+    parent.setAttribute('data-index', nextIndex);
+    list.style.marginLeft = nextIndex * -100 + '%';
+
+    // jei i ekrana ivaziuoja "klonai", tai juos "teleportuojame"
+    if ( nextIndex === 0 ) {
+        setTimeout(() => {
+            list.classList.add('no-animation');
+            nextIndex = testimonials.length;
+            parent.setAttribute('data-index', nextIndex);
+            list.style.marginLeft = testimonials.length * -100 + '%';
+        }, 1000);
+        setTimeout(() => {
+            list.classList.remove('no-animation');
+        }, 1100)
+    }
+    if ( nextIndex === testimonials.length + 1 ) {
+        setTimeout(() => {
+            list.classList.add('no-animation');
+            nextIndex = 1;
+            parent.setAttribute('data-index', nextIndex);
+            list.style.marginLeft = -100 + '%';
+        }, 1000);
+        setTimeout(() => {
+            list.classList.remove('no-animation');
+        }, 1100)
+    }
+
+    let barIndex = nextIndex;
+    if ( nextIndex === 0 ) {
+        barIndex = testimonials.length;
+    }
+    if ( nextIndex === testimonials.length + 1 ) {
+        barIndex = 1;
+    }
+    bar.style.marginLeft = (barIndex - 1) * (100 / testimonials.length) + '%';
+    
+
+    setTimeout(() => {
+        testimonialsAnimationInProgress = false;
+    }, 1100);
+}
+
+function autoCounter() {
+    const elements = document.querySelectorAll('[data-counter-from]');
+    const speed = 1000 / 24;
+    
+    for ( let i=0; i<elements.length; i++ ) {
+        let step = 0;
+        const elem = elements[i];
+        const from = parseFloat(elem.dataset.counterFrom);
+        const to = parseFloat(elem.dataset.counterTo);
+        const time = parseFloat(elem.dataset.counterTime);
+        const totalSteps = Math.ceil(time / speed) + 1;
+        
+        elem.textContent = from;
+        
+        const timer = setInterval(() => {
+            step++;
+            elem.textContent = Math.round((to - from) / totalSteps * step);
+            if ( step === totalSteps ) {
+                clearInterval( timer );
+            }
+        }, speed);
+    }
+}
+
+function lightbox() {
+    const elements = document.querySelectorAll('[data-lightbox]');
+    
+    elements.forEach( elem => {
+        elem.addEventListener('click', updateLightbox)
+    })
+}
+
+function updateLightbox( event ) {
+    let lightboxDOM = document.querySelector('.lightbox');
+    let lightboxImg = null;
+    if ( lightboxDOM ) {
+        lightboxImg = lightboxDOM.querySelector('img');
+    }
+
+    // jei lightbox'os dar nera - sukuriame
+    if ( !lightboxDOM ) {
+        const HTML = `
+            <div class="lightbox">
+                <div class="background"></div>
+                <div class="content">
+                    <img src="#">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>`;
+        document.querySelector('body')
+            .insertAdjacentHTML('beforeend', HTML);
+        lightboxDOM = document.querySelector('.lightbox');
+        lightboxImg = lightboxDOM.querySelector('img');
+        lightboxDOM.querySelector('.background')
+            .addEventListener('click', () => {
+                lightboxDOM.classList.add('hide');
+            })
+        lightboxDOM.querySelector('i')
+            .addEventListener('click', () => {
+                lightboxDOM.classList.add('hide');
+            })
+    } else {
+        lightboxDOM.classList.remove('hide');
+    }
+    
+    const item = event.target.closest('[data-lightbox]');
+    const image = item.dataset.lightbox;
+    let imageSrc = '';
+    if ( image === '' ) {
+        imageSrc = item.src;
+    } else {
+        imageSrc = item.querySelector(image).src;
+    }
+    lightboxImg.src = imageSrc;
 }
